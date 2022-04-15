@@ -17,7 +17,7 @@
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { D7, E6, B4, B5 }
-#define MATRIX_COL_PINS { B3, C6, D4, B2, B6 }
+#define MATRIX_COL_PINS { B3, C6, D4, B6, B2 }
 #define UNUSED_PINS
 
 /* COL2ROW or ROW2COL */
@@ -49,5 +49,5 @@
 #endif
 
 #pragma once
-#define ENCODERS_PAD_A { F5 }
-#define ENCODERS_PAD_B { F4 }
+#define ENCODERS_PAD_A { F4 }
+#define ENCODERS_PAD_B { F5 }

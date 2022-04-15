@@ -59,12 +59,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	return MACRO_NONE;
 }
 
-void matrix_init_user(void) {
-}
-
-void matrix_scan_user(void) {
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return true;
 }
@@ -82,8 +76,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   return false;
 }
 
-#ifdef OLED_DRIVER_ENABLE
-void oled_task_user(void) {
+#ifdef OLED_ENABLE
+bool oled_task_user(void) {
 	oled_write_P(PSTR("Layer: "), false);
 	
 	switch (get_higher_layer(layer_state)) {
