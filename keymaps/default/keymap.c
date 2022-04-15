@@ -1,5 +1,4 @@
 #include "smol_keypad.h"
-#include QMK_KEYBOARD_H
 
 enum layer_names {
 	_BASE,
@@ -98,7 +97,7 @@ uint32_t anim_sleep = 0;
 uint8_t current_frame = 0;
 
 /* status variables */
-int   current_wpm = 0;
+uint8_t   current_wpm = 0;
 led_t led_usb_state;
 
 bool isSneaking = false;
@@ -318,12 +317,13 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
 
 /* KEYBOARD PET END */
 void oled_task_user(void) {
-    // Host Keyboard Layer Status
-	current_wpm   = get_current_wpm();
+    // status for luna
+	current_wpm = get_current_wpm();
     led_usb_state = host_keyboard_led_state();
 	
     oled_write_P(PSTR("Layer: "), false);
 
+	// output current layer
     switch (get_highest_layer(layer_state)) {
         case _BASE:
             oled_write_P(PSTR("Base\n"), false);
@@ -343,7 +343,15 @@ void oled_task_user(void) {
         default:
             oled_write_ln_P(PSTR("Undefined\n"), false);
     }
+	
     render_luna(13, 1);
     
+}
+#endif
+
+// make all keys increase wpm
+#ifdef WPM_ENABLE
+bool wpm_keycode_user(uint16_t keycode) {
+	return true;
 }
 #endif
