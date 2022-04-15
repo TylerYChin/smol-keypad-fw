@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-//#include "config_common.h"
+#include "config_common.h"
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
@@ -25,18 +25,18 @@
 
 /* number of backlight levels */
 
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
+//#ifdef BACKLIGHT_PIN
+//#define BACKLIGHT_LEVELS 3
+//#endif
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCING_DELAY 5
 
-/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-#define LOCKING_SUPPORT_ENABLE
+///* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
+//#define LOCKING_SUPPORT_ENABLE
 
 /* Locking resynchronize hack */
-#define LOCKING_RESYNC_ENABLE
+//#define LOCKING_RESYNC_ENABLE
 
 /* key combination for command */
 #define IS_COMMAND() ( \
@@ -48,6 +48,5 @@
 
 #endif
 
-#pragma once
 #define ENCODERS_PAD_A { F4 }
 #define ENCODERS_PAD_B { F5 }

@@ -1,5 +1,5 @@
 #include "smol_keypad.h"
-
+#include QMK_KEYBOARD_H
 enum layer_names {
 	_BASE,
 	_MOD,
@@ -63,6 +63,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	return true;
 }
 
+#ifdef OLED_DRIVER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
   /* With an if statement we can check which encoder was turned. */
   if (index == 0) { /* First encoder */
@@ -76,6 +77,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   return false;
 }
 
+/*
 #ifdef OLED_ENABLE
 bool oled_task_user(void) {
 	oled_write_P(PSTR("Layer: "), false);
@@ -100,5 +102,41 @@ bool oled_task_user(void) {
 			oled_write_P(PSTR("What\n"), false);
 	}
 	return false;
+}
+#endif
+*/
+
+
+void oled_task_user(void) {
+    // Host Keyboard Layer Status
+    oled_write_P(PSTR("Layer: "), false);
+
+    switch (get_highest_layer(layer_state)) {
+        case _BASE:
+            oled_write_P(PSTR("Base\n"), false);
+            break;
+        case _MOD:
+            oled_write_P(PSTR("Modulo\n"), false);
+            break;
+        case _PRGM:
+            oled_write_P(PSTR("Program\n"), false);
+            break;
+		case _FCT:
+            oled_write_P(PSTR("Func\n"), false);
+			break;
+		case _TEST:
+            oled_write_P(PSTR("Test\n"), false);
+			break;
+        default:
+            // Or use the write_ln shortcut over adding '\n' to the end of your string
+            oled_write_ln_P(PSTR("Undefined"), false);
+    }
+
+    // Host Keyboard LED Status
+    led_t led_state = host_keyboard_led_state();
+    oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
+    oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
+    oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
+    
 }
 #endif
