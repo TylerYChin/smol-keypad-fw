@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "config_common.h"
+//#include "config_common.h"
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
@@ -46,13 +46,8 @@
 /* prevent stuck modifiers */
 #define PREVENT_STUCK_MODIFIERS
 
-
-#ifdef RGB_DI_PIN
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 0
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
 #endif
 
-#endif
+#pragma once
+#define ENCODERS_PAD_A { F5 }
+#define ENCODERS_PAD_B { F4 }
